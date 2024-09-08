@@ -1,0 +1,660 @@
+<template>
+    <section id="mainSectionForAdmin">
+        <div id="sideBar" @mouseover="sideBarHoverIn" @mouseout="sideBarHoverOut">
+            <header>
+                <div id="logo">
+                    <font-awesome-icon icon="fa-solid fa-graduation-cap" class="graduationIcon" />
+                    <p>Xcourse</p>
+                </div>
+                <div id="userDetails">
+                    <div id="userImg">
+                        <img :src="userImg" :alt="userImg">
+                    </div>
+                    <div id="userParagraph">
+                        <p>{{ fullName }}</p>
+                        <p>Admin</p>
+                    </div>
+                </div>
+            </header>
+            <div id="lists">
+                <ul>
+                    <!-- start feild -->
+                    <li class="feild">
+                        <nav>
+                            <nav id="feildIcon">
+                                <font-awesome-icon icon="fa-solid fa-chart-simple" />
+                            </nav>
+                            <p>dashboard</p>
+                        </nav>
+                        <div>
+                            <font-awesome-icon icon="fa-solid fa-plus" class="listStat" />
+                        </div>
+                    </li>
+                    <ul class="list">
+                        <router-link to="/Xcourse/Admin/dashboard/AllInfo">
+                            <li>all</li>
+                        </router-link>
+                        <router-link to="/Xcourse/Admin/dashboard/AllInfo">
+                            <li>teachers</li>
+                        </router-link>
+                        <li>students</li>
+                        <li>courses</li>
+                    </ul>
+                    <!-- end feild -->
+                    <li class="feild">
+                        <nav>
+                            <nav id="feildIcon">
+                                <font-awesome-icon icon="fa-solid fa-user-tie" />
+                            </nav>
+                            <p>teachers</p>
+                        </nav>
+                        <div>
+                            <font-awesome-icon icon="fa-solid fa-plus" class="listStat" />
+                        </div>
+                    </li>
+                    <ul class="list">
+                        <li>all teachers</li>
+                        <li><router-link to="/Xcourse/Admin/teachers/addTeacher">add teacher</router-link> </li>
+                        <li>edit teacher</li>
+                        <li>about teacher</li>
+                    </ul>
+
+                    <li class="feild">
+                        <nav>
+                            <nav id="feildIcon">
+                                <font-awesome-icon icon="fa-solid fa-user-group" />
+                            </nav>
+                            <p>students</p>
+                        </nav>
+                        <div>
+                            <font-awesome-icon icon="fa-solid fa-plus" class="listStat" />
+                        </div>
+                    </li>
+                    <ul class="list">
+                        <li>all students</li>
+                        <li><router-link to="/Xcourse/Admin/teachers/addTeacher">add students</router-link> </li>
+                        <li>edit students</li>
+                        <li>about students</li>
+                    </ul>
+
+                    <!-- start departments feild -->
+                    <li class="feild">
+                        <nav>
+                            <nav id="feildIcon">
+                                <font-awesome-icon icon="fa-solid fa-puzzle-piece" />
+                            </nav>
+                            <p>departments</p>
+                        </nav>
+                        <div>
+                            <font-awesome-icon icon="fa-solid fa-plus" class="listStat" />
+                        </div>
+                    </li>
+                    <ul class="list">
+                        <router-link to="/Xcourse/Admin/dashboard/AllInfo">
+                            <li>all departments</li>
+                        </router-link>
+                        <router-link to="/Xcourse/Admin/departments/addDepartment">
+                            <li>add department</li>
+                        </router-link>
+                        <router-link to="/Xcourse/Admin/dashboard/AllInfo">
+                            <li>edit department</li>
+                        </router-link>
+                        <router-link to="/Xcourse/Admin/dashboard/AllInfo">
+                            <li>delete departments</li>
+                        </router-link>
+                    </ul>
+                    <!-- end departments feild -->
+
+                    <li class="feild">
+                        <nav>
+                            <nav id="feildIcon">
+                                <font-awesome-icon icon="fa-solid fa-graduation-cap" />
+                            </nav>
+                            <p>courses</p>
+                        </nav>
+                        <div>
+                            <font-awesome-icon icon="fa-solid fa-plus" class="listStat" />
+                        </div>
+                    </li>
+                    <ul class="list">
+                        <li>all courses</li>
+                        <router-link to="/Xcourse/Admin/courses/addCourse">
+                            <li>add course</li>
+                        </router-link>
+                        <li>edit course</li>
+                    </ul>
+
+                    <li class="feild">
+                        <nav>
+                            <nav id="feildIcon">
+                                <font-awesome-icon icon="fa-solid fa-book-open-reader" />
+                            </nav>
+                            <p>library</p>
+                        </nav>
+                        <div>
+                            <font-awesome-icon icon="fa-solid fa-plus" class="listStat" />
+                        </div>
+                    </li>
+                    <ul class="list">
+                        <li>all library assest</li>
+                        <li>add library assest</li>
+                        <li>edit library assest</li>
+                    </ul>
+
+                    <li class="feild">
+                        <nav>
+                            <nav id="feildIcon">
+                                <font-awesome-icon icon="fa-solid fa-lock" />
+                            </nav>
+                            <p>admin</p>
+                        </nav>
+                        <div>
+                            <font-awesome-icon icon="fa-solid fa-plus" class="listStat" />
+                        </div>
+                    </li>
+                    <ul class="list">
+                        <router-link to="/Xcourse/Admin/admin/addAdmin">
+                            <li>add new admin</li>
+                        </router-link>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div id="shower">
+            <div id="showerNavBar">
+                <nav>
+                    <font-awesome-icon icon="fa-solid fa-bars" id="sideBarListButton" @click="sideBarListButton" />
+                </nav>
+                <nav id="rightNav">
+                    <font-awesome-icon icon="fa-solid fa-expand" id="screenMode" class="icon" />
+                    <font-awesome-icon icon="fa-solid fa-bell" id="notification" class="icon" />
+                    <font-awesome-icon icon="fa-solid fa-language" id="language" class="icon" />
+                    <nav @click="userList">
+                        <p>{{ fullName }}</p>
+                        <img :src="userImg" alt="">
+                    </nav>
+                    <div id="userList">
+                        <ul>
+                            <li>
+                                <font-awesome-icon icon="fa-regular fa-user" />
+                                <router-link to="/signin" class="accountListRouters">account</router-link>
+                            </li>
+                            <li>
+                                <font-awesome-icon icon="fa-regular fa-envelope" />
+                                <router-link to="/signin" class="accountListRouters">inbox</router-link>
+                            </li>
+                            <li>
+                                <font-awesome-icon icon="fa-solid fa-sliders" />
+                                <router-link to="/signin" class="accountListRouters">setting</router-link>
+                            </li>
+                            <li>
+                                <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
+                                <router-link to="/signin" class="accountListRouters">log out</router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div id="showerPanal">
+                <router-view />
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+const axios = require('axios');
+axios.defaults.withCredentials = true;
+export default {
+    name: 'ADMIN',
+    data: function () {
+        return {
+            feildState: 'fa-solid fa-plus',
+            userImg: '',
+            fullName: ''
+
+        }
+    },
+    mounted() {
+        let feild = document.querySelectorAll('.feild')
+        let list = document.querySelectorAll('.list')
+        for (let i = 0; i < feild.length; i++) {
+            feild[i].addEventListener('click', () => {
+                if (list[i].style.display === 'block') {
+                    list[i].style.display = 'none'
+                    feild[i].lastChild.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>'
+                } else {
+                    list[i].style.display = 'block'
+                    feild[i].lastChild.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>'
+                }
+            })
+        }
+        // screen mode 
+        let screenModeButton = document.querySelector('#screenMode')
+        screenModeButton.addEventListener('click', () => {
+            let screenMode = document.documentElement
+            if (screenMode.requestFullscreen) {
+                screenMode.requestFullscreen();
+            } else if (screenMode.webkitRequestFullscreen) { /* Safari */
+                screenMode.webkitRequestFullscreen();
+            } else if (screenMode.msRequestFullscreen) { /* IE11 */
+                screenMode.msRequestFullscreen();
+            }
+            /* Close fullscreen */
+            if (!screenMode.requestFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+            }
+        })
+
+        // get admin details info 
+        axios.get('http://localhost:8081/Xcourse/Admin')
+            .then(res => {
+                return res.data
+            })
+            .then(res => {
+                console.log(res)
+                if (res) {
+                    // this.userImg = res.photo
+                    this.imagePath(res.photo)
+                    this.fullName = res.fullName
+                } else {
+                    this.$router.push({ path: '/signin' })
+                }
+            })
+    },
+    methods: {
+        imagePath(imageName) {
+            if (imageName !== '') {
+                this.userImg = require(`@/assets/imagesUploaded/${imageName}`);
+            }
+        },
+        userList: function () {
+            let userList = document.querySelector('#userList')
+            if (userList.style.display === 'block') {
+                userList.style.display = 'none'
+            } else {
+                userList.style.display = 'block'
+            }
+        },
+        sideBarListButton: function () {
+            let sideBar = document.querySelector('#sideBar')
+            let shower = document.querySelector('#shower')
+            let logoParagraph = document.querySelector('#logo p')
+            let userDetails = document.querySelector('#userDetails')
+            let feild = document.querySelectorAll('.feild nav p')
+            let feildList = document.querySelectorAll('.list')
+            let listStat = document.querySelectorAll('.listStat')
+            if (sideBar.style.width != '4%') {
+                sideBar.setAttribute('style', `width: 4%;`)
+                shower.setAttribute('style', `width: 96%; left: 4%;`)
+                logoParagraph.style.display = 'none'
+                userDetails.style.display = 'none'
+                feild.forEach((e) => {
+                    e.style.display = 'none'
+                })
+                listStat.forEach((e) => {
+                    e.style.display = 'none'
+                })
+                feildList.forEach(e => {
+                    e.style.display = 'none'
+                })
+            } else {
+                sideBar.setAttribute('style', `width: 17%;`)
+                shower.setAttribute('style', `width: 83%; left: 17%;`)
+                logoParagraph.style.display = 'block'
+                userDetails.style.display = 'flex'
+                feild.forEach((e) => {
+                    e.style.display = 'block'
+                })
+                listStat.forEach((e) => {
+                    e.style.display = 'block'
+                })
+            }
+        },
+        sideBarHoverIn: function () {
+            let sideBar = document.querySelector('#sideBar')
+            let shower = document.querySelector('#shower')
+            let logoParagraph = document.querySelector('#logo p')
+            let userDetails = document.querySelector('#userDetails')
+            let feild = document.querySelectorAll('.feild nav p')
+            let listStat = document.querySelectorAll('.listStat')
+
+            if (sideBar.style.width == '4%') {
+                console.log('done')
+                sideBar.setAttribute('style', `width: 17%;`)
+                shower.setAttribute('style', `width: 83%; left: 17%;`)
+                logoParagraph.style.display = 'block'
+                userDetails.style.display = 'flex'
+                feild.forEach((e) => {
+                    e.style.display = 'block'
+                })
+                listStat.forEach((e) => {
+                    e.style.display = 'block'
+                })
+            }
+        },
+        sideBarHoverOut: function () {
+            // let sideBar = document.querySelector('#sideBar')
+            // let shower = document.querySelector('#shower')
+            // let logoParagraph = document.querySelector('#logo p')
+            // let userDetails = document.querySelector('#userDetails')
+            // let feild = document.querySelectorAll('.feild nav p')
+            // let listStat = document.querySelectorAll('.listStat')
+            // if(sideBar.style.width != '5%'){
+            //     sideBar.setAttribute('style',`width: 5%;`)
+            //     shower.setAttribute('style',`width: 95%; left: 5%;`)
+            //     logoParagraph.style.display = 'none'
+            //     userDetails.style.display = 'none'
+            //     feild.forEach((e) => {
+            //         e.style.display = 'none'
+            //     })
+            //     listStat.forEach((e) => {
+            //         e.style.display = 'none'
+            //     })
+            // }
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+// $main-color: none;
+$main-color: #39444d;
+$second-color: #eee;
+#mainSectionForAdmin {
+    background-color: $second-color;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    user-select: none;
+}
+section {
+    display: flex;
+    #sideBar {
+        position: absolute;
+        height: 100%;
+        width: 17%;
+        color: #eee;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-gutter: stable;
+        box-shadow: 1px 1px 5px white;
+        z-index: 1;
+        background-color: $main-color;
+        header {
+            #logo {
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                
+                .graduationIcon {
+                    color: blue;
+                    font-size: 2.2vw;
+                }
+
+                p {
+                    color: white;
+                    text-transform: capitalize;
+                    font-size: 1.5vw;
+                }
+            }
+
+            #userDetails {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                align-items: center;
+                padding: 15px 0;
+
+                #userImg {
+                    width: 100px;
+                    height: 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    img {
+                        width: 80px;
+                        height: 80px;
+                        border-left: 3px solid blue;
+                    }
+                }
+
+                #userParagraph {
+                    margin-left: 10px;
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+            }
+        }
+
+        #lists {
+            ul {
+                .feild {
+                    text-transform: capitalize;
+                    font-size: 1vw;
+                    font-family: Arial, Helvetica, sans-serif;
+                    margin: 0px 10px;
+                    padding: 15px 10px;
+                    list-style: none;
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    nav {
+                        display: flex;
+                        align-items: center;
+                        font-size: 1.2vw;
+                        #feildIcon{
+                            width: 30%;
+                            svg{
+                                color:  orange;
+                            }
+                        }
+                        p {
+                            padding-left: 10px;
+                            font-size: 1vw;
+                        }
+                    }
+                }
+
+                .feild:hover {
+                    cursor: pointer;
+                    background-color: rgba(0, 0, 255, 0.619);
+                }
+
+                .list {
+                    display: none;
+                    line-height: 30px;
+                    list-style: none;
+                    font-size: 1vw;
+                    text-transform: capitalize;
+                    font-family: Arial, Helvetica, sans-serif;
+                    margin: 0px 15px;
+                    * {
+                        text-decoration: none;
+                        color: #eee;
+                    }
+
+                    li {
+                        padding: 5px 0px 5px 40px;
+                        border-radius: 10px;
+                    }
+
+                    li:hover {
+                        cursor: pointer;
+                        background-color: blue;
+                        transform: scale(1.3);
+                    }
+                }
+            }
+        }
+    }
+
+    #sideBar:hover {
+        animation-name: sideBarShift;
+        animation-duration: 5s;
+    }
+
+    #shower {
+        position: absolute;
+        height: 100%;
+        width: 83%;
+        left: 17%;
+
+        #showerNavBar {
+            width: 100%;
+            height: 61px;
+            background-color: $main-color;
+            backdrop-filter: blur(1000px);
+            -webkit-backdrop-filter: blur(1000px);
+            color: #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            box-shadow: 1px 1px 5px white;
+            nav:first-child {
+                font-size: 20px;
+                padding-left: 10px;
+            }
+
+            nav:first-child:hover {
+                cursor: pointer;
+            }
+
+            #rightNav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 20%;
+                font-size: 17px;
+
+                nav {
+                    display: flex;
+                    align-items: center;
+                    font-size: 14px;
+                    font-family: Arial, Helvetica, sans-serif;
+                    width: 100px;
+                    margin-right: 20px;
+
+                    img {
+                        width: 60px;
+                        height: 50px;
+                        border-radius: 50%;
+                        border: 1px solid white;
+                        margin-left: 20px;
+                    }
+                }
+
+                nav:hover {
+                    cursor: pointer;
+                }
+
+                .icon:hover {
+                    cursor: pointer;
+                }
+
+                #userList {
+                    display: none;
+                    position: absolute;
+                    width: 144px;
+                    top: 51px;
+                    right: 15px;
+                    background-color: #1b2130;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    text-transform: capitalize;
+                    color: #eee;
+                    font-size: 14px;
+                    box-shadow: 1px 3px 5px #202738;
+                    z-index: 1;
+                    float: right;
+
+                    ul {
+                        list-style: none;
+                        font-family: Arial, Helvetica, sans-serif;
+
+                        li {
+                            line-height: 30px;
+
+                            .accountListRouters {
+                                text-decoration: none;
+                                color: inherit;
+                                padding-left: 5px;
+                            }
+                        }
+
+                        li:hover {
+                            cursor: pointer;
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes leftShift {
+    to {
+        padding-left: 100px;
+    }
+}
+
+@keyframes sideBarShift {
+    to {
+        width: 17%;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #1b2131;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 20px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #sideBar{
+        display: none;
+    }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    #sideBar{
+        display: none;
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #sideBar{
+        display: none;
+    }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    #sideBar{
+        display: block;
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    #sideBar{
+        display: block;
+    }
+}
+
+</style>

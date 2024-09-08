@@ -1,0 +1,240 @@
+<template>
+    <section id="mainSection">
+        <header>
+            <div>
+                <font-awesome-icon icon="fa-regular fa-circle-left" id="sidebar-button" @click="sidebar_Button" />
+                <div>
+                    <font-awesome-icon icon="fa-solid fa-graduation-cap" class="graduationIcon" />
+                    <h1>LMS</h1>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li>get help</li>
+                    <li>fourm</li>
+                </ul>
+                <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+                <font-awesome-icon icon="fa-solid fa-bell" />
+                <div class="user" @click="user_list">
+                    <img src="../assets/course.png" alt="">
+                    <font-awesome-icon icon="fa-solid fa-caret-down"  class="user-list-icon"/>
+                </div>
+                <div class="user-list" user-list-state="close">
+                    <ul>
+                        <li>accout</li>
+                        <li>inbox</li>
+                        <router-link to="/signin"><li>log out</li></router-link>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- all page without the header -->
+        <section id="second-section">
+            <div id="sidebar" sidebar-state="open">
+
+            </div>
+            <div id="viewer">
+
+            </div>
+        </section>
+    </section>
+</template>
+<script>
+// import axios from 'axios'
+export default {
+    name: "StudentView",
+    data: function () {
+        return {
+            
+        }
+    },
+    mounted(){
+
+    },
+    methods: {
+        sidebar_Button(){
+            let sidebar = document.querySelector('#sidebar')
+            let sidebar_Button = document.querySelector('#sidebar-button')
+            if(sidebar.getAttribute('sidebar-state') === 'open'){
+                sidebar.setAttribute('sidebar-state','close')
+                sidebar_Button.style.transform = 'rotate(180deg)' 
+            }else{
+                sidebar.setAttribute('sidebar-state','open')
+                sidebar_Button.style.transform = 'rotate(0deg)' 
+            }
+        },
+        user_list(){
+            let user_list = document.querySelector('.user-list')
+            let user_list_icon = document.querySelector('.user-list-icon')
+            if(user_list.getAttribute('user-list-state') === 'close'){
+                user_list.setAttribute('user-list-state','open')
+                user_list_icon.style.transform = "rotate(0deg)"
+            }else{
+                user_list.setAttribute('user-list-state','close')
+                user_list_icon.style.transform = "rotate(-90deg)"
+            }
+        }
+    }
+}
+</script>
+<style lang="scss" scoped>
+$main-color: #39444d;
+$blue-color: #2b9eea;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+#mainSection{
+    header{
+        user-select: none;
+        position: absolute;
+        width:  100%;
+        height: 64px;
+        background-color: $main-color;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;        
+        color: white;
+        div:first-child{
+            display: flex;
+            align-items: center;
+            svg{
+                color: $main-color;
+                font-size: 30px;
+                transition: 1s;
+                color: #eee;
+                transition: .2s;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+            div{
+                display: flex;
+                align-items: center;
+                margin-left: 20px;
+                svg{
+                    color: $main-color;
+                    font-size: 40px;
+                    color: #eee;
+                }
+                h1{
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    font-size: 2vw;
+                    margin-left: 10px;
+                }
+            }
+        }
+        div:last-child{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            color: #eee;
+            svg{
+                font-size: 20px;
+                margin-left:25px;
+            }
+            ul{
+                text-decoration: none;
+                display: flex;
+                list-style: none;
+                li{
+                    margin-left: 25px;
+                    font-size: 18px;
+                    text-transform: capitalize;
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                }
+            }
+            .user{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 25px;
+                svg{
+                    // color: black;
+                    font-size: 15px;
+                    margin-left: 10px;
+                    transform: rotate(-90deg);
+                }
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 25px;
+                    background-color: white;
+                }
+            }
+            *{
+                transition: .2s;
+            }
+            *:not(ul):hover{
+                cursor: pointer;
+                color: white;
+            }
+            .user-list{
+                position: relative;
+                overflow-y: hidden;
+                ul{
+                    overflow: hidden;
+                    *{
+                        text-decoration: none;
+                        color: #eee;
+                    }
+                }
+                ul::before{
+                    content: '';
+                    position: absolute;
+                    width: 3px;
+                    height: 200%;
+                    background-color: $blue-color;
+                    left: 10px;
+                    top: -50%;
+                }
+            }
+            .user-list[user-list-state="close"]{
+                display: none;
+            }
+            .user-list[user-list-state="open"]{
+                display: block;
+                animation-name: user-list;
+                animation-duration: .5s;
+            }
+        }
+    }
+    // end header styling
+    #second-section{
+        position: absolute;
+        width: 100%;
+        height: calc(100% - 64px);
+        top: 64px;
+        display: flex;
+        #sidebar{
+            height: 100%;
+            background-color: #39444d!important;
+            transition: .5s;
+            &[sidebar-state='open']{
+                width: 20%;
+            }
+            &[sidebar-state='close']{
+                width: 0;
+            }
+        }
+        #viewer{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #eee;
+        }
+    }
+}
+@keyframes user-list {
+    from{
+        width: 0;
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+        width: max-content;
+    }
+}
+</style>
